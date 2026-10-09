@@ -1,6 +1,6 @@
 {
-  "name": "書留台帳",
-  "short_name": "書留台帳",
+  "name": "書留の記録",
+  "short_name": "書留の記録",
   "lang": "ja",
   "start_url": "./",
   "scope": "./",

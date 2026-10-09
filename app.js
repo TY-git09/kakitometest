@@ -1,4 +1,4 @@
-// 画面と台帳。台帳はこの端末のブラウザ内(IndexedDB)にだけ保存する。
+// 画面と記録の保存。記録はこの端末のブラウザ内(IndexedDB)にだけ保存する。
 // このファイルにも、外部へデータを送る処理は無い。
 
 /* global XLSX */
@@ -17,7 +17,7 @@ export function trackingUrl(numbers) {
 }
 
 // ---------------------------------------------------------------------------
-// 台帳(IndexedDB)。郵便1通につき1件、お問い合わせ番号で重複を防ぐ。
+// 記録の保存(IndexedDB)。郵便1通につき1件、お問い合わせ番号で重複を防ぐ。
 // ---------------------------------------------------------------------------
 let dbPromise = null;
 function db() {
@@ -213,7 +213,7 @@ async function editName(it) {
 }
 
 async function removeItem(it) {
-  if (!confirm(`${it.recipient || it.number} を台帳から消しますか?`)) return;
+  if (!confirm(`${it.recipient || it.number} を消しますか?`)) return;
   await deleteItem(it.number);
   render();
 }
@@ -235,7 +235,7 @@ async function render() {
   list.replaceChildren(...rows.map(itemCard));
   if (!rows.length) {
     list.append(el("div", { class: "empty" }, query
-      ? "台帳には見つかりませんでした。名前の一部・町名・郵便番号でも試してください。それでもなければ紙の受領証を確認してください。"
+      ? "見つかりませんでした。名前の一部・町名・郵便番号でも試してください。それでもなければ紙の受領証を確認してください。"
       : "まだ登録がありません。受領証を撮ると、ここに並びます。"));
   }
 }
@@ -244,7 +244,7 @@ function showRegistered(receipt, result) {
   const box = $("registered");
   box.replaceChildren();
   if (result.expired) {
-    setStatus(`発行日が ${formatDate(result.date)} で、台帳に残す日数を過ぎているため登録しませんでした。`, "error");
+    setStatus(`発行日が ${formatDate(result.date)} で、記録を残す日数を過ぎているため登録しませんでした。`, "error");
     return;
   }
   const notes = [];
@@ -299,9 +299,9 @@ async function exportXlsx() {
   });
   sheet["!cols"] = [12, 26, 58, 11, 17, 8, 10, 12].map((wch) => ({ wch }));
   const book = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(book, sheet, "台帳");
+  XLSX.utils.book_append_sheet(book, sheet, "記録");
   const bytes = XLSX.write(book, { bookType: "xlsx", type: "array" });
-  const file = new File([bytes], `書留台帳_${today()}.xlsx`, {
+  const file = new File([bytes], `書留の記録_${today()}.xlsx`, {
     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   });
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -327,7 +327,7 @@ async function start() {
     render();
   });
   $("wipe").addEventListener("click", async () => {
-    if (!confirm("台帳をすべて消します。元に戻せません。よろしいですか?")) return;
+    if (!confirm("記録をすべて消します。元に戻せません。よろしいですか?")) return;
     await clearItems();
     $("registered").replaceChildren();
     setStatus("");

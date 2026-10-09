@@ -1,6 +1,6 @@
 // 一度開いたあとは、電波のない場所でも使えるように部品を端末に保存しておく。
-// 保存するのはプログラムとモデルだけで、台帳や写真は扱わない。
-const VERSION = "v2";
+// 保存するのはプログラムとモデルだけで、記録や写真は扱わない。
+const VERSION = "v3";
 const FILES = [
   "./", "index.html", "app.js", "reader.js", "manifest.webmanifest", "icon-180.png", "icon-512.png",
   "opencv.js", "ort.wasm.min.js", "ort-wasm-simd-threaded.mjs",

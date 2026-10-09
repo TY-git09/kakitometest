@@ -8,11 +8,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self'; worker-src 'self'; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="書留台帳">
+<meta name="apple-mobile-web-app-title" content="書留の記録">
 <meta name="theme-color" content="#f6f4ef">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
-<title>書留台帳</title>
+<title>書留の記録</title>
 <style>
   :root {
     --paper: #f6f4ef; --card: #ffffff; --ink: #1d2433; --sub: #5f6777; --line: #dcd8cd;
@@ -81,7 +81,7 @@
 <body>
 <main>
   <header>
-    <h1>書留台帳</h1>
+    <h1>書留の記録</h1>
     <span id="count"></span>
   </header>
 
@@ -95,7 +95,7 @@
   <div id="status" hidden role="status" aria-live="polite"></div>
   <div id="registered"></div>
 
-  <input type="search" id="search" placeholder="名前・住所・郵便番号・番号で探す" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="台帳を検索">
+  <input type="search" id="search" placeholder="名前・住所・郵便番号・番号で探す" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="記録を検索">
   <div id="listTitle"></div>
   <div id="list"></div>
 
@@ -104,12 +104,12 @@
     <div class="row">
       <button id="export">Excelファイルに書き出す</button>
     </div>
-    <p>台帳はこのiPhoneの中にだけ保存されています。書き出したファイルは「ファイル」アプリやNumbersで開けます。</p>
-    <label class="field">台帳に残す日数(0で消さない)
+    <p>記録はこのiPhoneの中にだけ保存されています。書き出したファイルは「ファイル」アプリやNumbersで開けます。</p>
+    <label class="field">記録を残す日数(0で消さない)
       <input type="number" id="retention" min="0" max="3650" inputmode="numeric">
     </label>
     <p>提出日からこの日数を過ぎた行は自動で消えます。郵便追跡ができるのは約100日間です。</p>
-    <button class="ghost danger" id="wipe">台帳をすべて消す</button>
+    <button class="ghost danger" id="wipe">記録をすべて消す</button>
     <p id="about"></p>
   </details>
 </main>
